@@ -1,0 +1,58 @@
+1. Component and why state is needed
+Components are the building blocks of a React application’s UI. 
+These components split up the entire UI into small independent and reusable pieces.
+Then it renders each of these components independent of each other without affecting the rest of the UI.
+
+State
+States are the heart of React components.
+States are the source of data and are objects which determine components rendering and behavior.
+They are mutable unlike the props and create dynamic and interactive components. 
+They are accessed via this.state().
+
+
+smart component
+A Smart Component is any component which manages its own state. 
+When working with Babel or ES6-style React, we've come to know this as any class-like object that extends Component. This includes either React.Component or in our case Nui.Types.Component.
+
+export default Nui => class MyComponent extends Nui.Types.Component {
+  render() {
+    return (
+      <h1>Hello World</h1>
+    );
+  }
+}
+
+Dumb component
+A Dumb Component can very easily be defined as a stateless component. A stateless component is much more efficient than a stateful one, because it doesn't require as many computer resources to render (memory, CPU, and GPU in terms of graphic-intensive apps).
+
+export default Nui => () => (
+    <h1>Hello World</h1>
+);
+
+
+Stateful Component	Stateless Component
+1. Stores info about component’s state change in memory	1. Calculates the internal state of the components
+2. Have authority to change state	2. Do not have the authority to change state
+3. Contains the knowledge of past, current and possible future changes in state	3. Contains no knowledge of past, current and possible future state changes
+4. Stateless components notify them about the requirement of the state change, then they send down the props to them.	4. They receive the props from the Stateful components and treat them as callback functions.
+
+
+
+when statefull component
+If the behaviour of a component is dependent on the state of the component then it can be termed as stateful component. These stateful components are always class components and have a state that gets initialized in the constructor.
+
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { count: 0 }
+  }
+
+  render() {
+    // ...
+  }
+}
+
+llifting state up
+When several components need to share the same changing data then it is recommended to lift the shared state up to their closest common ancestor. That means if two child components share the same data from its parent, then move the state to parent instead of maintaining local state in both of the child components.
+
+local and global state
